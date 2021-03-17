@@ -1,29 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { TodoListEntry } from './TodoListEntry/TodoListEntry';
 import './TodoList.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { addTodo, removeTodo, selectTodos, toggleTodo } from '../../redux';
 
 export const TodoList = () => {
+    const dispatch = useDispatch();
+    const todos = useSelector(selectTodos);
+    const [input, setInput] = useState('');
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         e.stopPropagation();
+        dispatch(addTodo(input));
+        setInput('');
     };
     return (
         <ul className="todo-list">
-            <TodoListEntry label="Make cookies" checked={false} />
-            <TodoListEntry label="Go to Christmas party" checked={false} />
-            <TodoListEntry
-                label="Wish everyone a merry Christmas"
-                checked={false}
-            />
-            <TodoListEntry label="Dress up like Santa" checked />
-            <TodoListEntry label="Ignore 1-3" checked />
-            <TodoListEntry label="Steal Christmas" checked />
+            {todos.map((item) => (
+                <TodoListEntry
+                    key={item.id}
+                    label={item.label}
+                    checked={item.checked}
+                    onToggle={() => dispatch(toggleTodo(item.id))}
+                    onRemove={() => dispatch(removeTodo(item.id))}
+                />
+            ))}
             <li>
                 <form className="todo-list-form" onSubmit={onSubmit}>
                     <input
                         className="todo-list-new-entry"
                         placeholder="Add a new entry..."
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
                     />
                     <button>+</button>
                 </form>
