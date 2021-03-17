@@ -1,10 +1,10 @@
-- npm i @reduxjs/toolkit
-- modify jest test
-  - Use createAction
-  - Use createReducer
-  - Mutate state object instead of returning new state
-    - Explain mutation vs return of "immer"
-  - Use combineReducers
-  - Use configureStore
-  - Use createSlice
-  - Use external action in createSlice
+- npm i react-redux @types/react-redux
+- create redux folder structure
+- move add action
+- move reducer
+- add "remove" and "toggle" actions and handle them in reducer
+- create function "createStore"
+- infer combined state type
+- create selector
+- wrap app with provider
+- make todo app use redux
