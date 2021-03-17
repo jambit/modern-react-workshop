@@ -1,4 +1,11 @@
-import { createStore } from 'redux';
+import {
+    configureStore,
+    createAction,
+    createReducer,
+    createSlice,
+    PayloadAction,
+} from '@reduxjs/toolkit';
+import { combineReducers } from 'redux';
 
 interface Todo {
     id: number;
@@ -6,88 +13,148 @@ interface Todo {
     checked: boolean;
 }
 
-const initialState = {
+const initialTodosState = {
     nextId: 1,
     items: [] as Todo[],
 };
 
-type TodoState = typeof initialState;
+const addTodo = createAction('todo/add', (label: string) => ({
+    payload: { label },
+}));
 
-interface AddTodoAction {
-    type: 'todo/add';
-    payload: {
-        label: string;
-    };
-}
+const todosReducer = createReducer(initialTodosState, (builder) => {
+    builder.addCase(addTodo, (state, action) => {
+        state.items.push({
+            id: state.nextId,
+            label: action.payload.label,
+            checked: false,
+        });
+        state.nextId++;
+    });
+});
 
-type TodoAction = AddTodoAction;
-
-function todosReducer(
-    state: TodoState | undefined,
-    action: TodoAction
-): TodoState {
-    if (!state) return initialState;
-
-    switch (action.type) {
-        case 'todo/add':
-            return {
-                ...state,
-                nextId: state.nextId + 1,
-                items: [
-                    ...state.items,
-                    {
-                        id: state.nextId,
-                        label: action.payload.label,
-                        checked: false,
-                    },
-                ],
-            };
-        default:
-            return state;
-    }
-}
+const todosSlice = createSlice({
+    name: 'slice-todos',
+    initialState: initialTodosState,
+    reducers: {
+        add(state, action: PayloadAction<{ label: string }>) {
+            state.items.push({
+                id: state.nextId,
+                label: action.payload.label,
+                checked: false,
+            });
+            state.nextId++;
+        },
+    },
+    extraReducers: (builder) => {
+        builder.addCase(addTodo, (state, action) => {
+            state.items.push({
+                id: state.nextId,
+                label: action.payload.label,
+                checked: false,
+            });
+            state.nextId++;
+        });
+    },
+});
 
 describe('basic redux', () => {
+    const reducer = combineReducers({
+        todos: todosReducer,
+    });
     it('returns the default state if nothing happened yet', () => {
-        const store = createStore(todosReducer);
+        const store = configureStore({ reducer });
         expect(store.getState()).toEqual({
-            nextId: 1,
-            items: [],
+            todos: {
+                nextId: 1,
+                items: [],
+            },
         });
-        expect(store.getState()).toBe(initialState);
+        expect(store.getState().todos).toBe(initialTodosState);
     });
 
     it('modifies the store state when dispatching an action', () => {
-        const store = createStore(todosReducer);
-        store.dispatch({
-            type: 'todo/add',
-            payload: {
-                label: 'Chores',
-            },
-        });
+        const store = configureStore({ reducer });
+        store.dispatch(addTodo('Chores'));
         expect(store.getState()).toEqual({
-            nextId: 2,
-            items: [
-                {
-                    id: 1,
-                    label: 'Chores',
-                    checked: false,
-                },
-            ],
+            todos: {
+                nextId: 2,
+                items: [
+                    {
+                        id: 1,
+                        label: 'Chores',
+                        checked: false,
+                    },
+                ],
+            },
         });
     });
 
     it('does not modify intialState when dispatching an action', () => {
-        const store = createStore(todosReducer);
-        store.dispatch({
-            type: 'todo/add',
-            payload: {
-                label: 'Chores',
-            },
-        });
-        expect(initialState).toEqual({
+        const store = configureStore({ reducer });
+        store.dispatch(addTodo('Chores'));
+        expect(initialTodosState).toEqual({
             nextId: 1,
             items: [],
+        });
+    });
+});
+
+describe('sliced redux', () => {
+    const reducer = combineReducers({
+        todos: todosSlice.reducer,
+    });
+    it('returns the default state if nothing happened yet', () => {
+        const store = configureStore({ reducer });
+        expect(store.getState()).toEqual({
+            todos: {
+                nextId: 1,
+                items: [],
+            },
+        });
+        expect(store.getState().todos).toBe(initialTodosState);
+    });
+
+    it('modifies the store state when dispatching an action', () => {
+        const store = configureStore({ reducer });
+        store.dispatch(todosSlice.actions.add({ label: 'Chores' }));
+        expect(store.getState()).toEqual({
+            todos: {
+                nextId: 2,
+                items: [
+                    {
+                        id: 1,
+                        label: 'Chores',
+                        checked: false,
+                    },
+                ],
+            },
+        });
+    });
+
+    it('does not modify intialState when dispatching an action', () => {
+        const store = configureStore({ reducer });
+        store.dispatch(todosSlice.actions.add({ label: 'Chores' }));
+        expect(initialTodosState).toEqual({
+            nextId: 1,
+            items: [],
+        });
+    });
+
+    it('modifies the store state when dispatching an external action', () => {
+        const store = configureStore({ reducer });
+        store.dispatch(addTodo('Chores'));
+        expect(store.getState()).toEqual({
+            todos: {
+                nextId: 2,
+                items: [
+                    {
+                        id: 1,
+                        label: 'Chores',
+                        checked: false,
+                    },
+                ],
+            },
         });
     });
 });
