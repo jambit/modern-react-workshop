@@ -1,3 +1,4 @@
+import 'regenerator-runtime/runtime';
 import React, { useMemo } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';

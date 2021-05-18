@@ -1,13 +1,49 @@
-import { createAction } from '@reduxjs/toolkit';
+import {
+    createAction,
+    PrepareAction,
+    PayloadActionCreator,
+} from '@reduxjs/toolkit';
+import { Todo } from './reducer';
 
-export const addTodo = createAction('todo/add', (label: string) => ({
-    payload: { label },
+export const loadTodos = createAction('todo/load', (items: Todo[]) => ({
+    payload: { items },
 }));
 
-export const removeTodo = createAction('todo/remove', (id: number) => ({
-    payload: { id },
-}));
+export const addTodo = {
+    start: createAction('todo/add/start', (label: string) => ({
+        payload: { label },
+    })),
+    success: createAction('todo/add/success', (item: Todo) => ({
+        payload: { item },
+    })),
+    failure: createAction('todo/add/failure', (label: string) => ({
+        payload: { label },
+    })),
+};
 
-export const toggleTodo = createAction('todo/toggle', (id: number) => ({
-    payload: { id },
-}));
+export const setTodoChecked = {
+    start: createAction(
+        'todo/set-checked/start',
+        (id: number, checked: boolean) => ({ payload: { id, checked } })
+    ),
+    success: createAction(
+        'todo/set-checked/success',
+        (id: number, checked: boolean) => ({ payload: { id, checked } })
+    ),
+    failure: createAction(
+        'todo/set-checked/failure',
+        (id: number, checked: boolean) => ({ payload: { id, checked } })
+    ),
+};
+
+export const removeTodo = {
+    start: createAction('todo/remove/start', (id: number) => ({
+        payload: { id },
+    })),
+    success: createAction('todo/remove/success', (id: number) => ({
+        payload: { id },
+    })),
+    failure: createAction('todo/remove/failure', (id: number) => ({
+        payload: { id },
+    })),
+};

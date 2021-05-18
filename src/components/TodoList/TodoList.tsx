@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { TodoListEntry } from './TodoListEntry/TodoListEntry';
 import './TodoList.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTodo, removeTodo, selectTodos, toggleTodo } from '../../redux';
+import { addTodo, removeTodo, selectTodos, setTodoChecked } from '../../redux';
 
 export const TodoList = () => {
     const dispatch = useDispatch();
@@ -12,7 +12,7 @@ export const TodoList = () => {
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         e.stopPropagation();
-        dispatch(addTodo(input));
+        dispatch(addTodo.start(input));
         setInput('');
     };
     return (
@@ -22,8 +22,8 @@ export const TodoList = () => {
                     key={item.id}
                     label={item.label}
                     checked={item.checked}
-                    onToggle={() => dispatch(toggleTodo(item.id))}
-                    onRemove={() => dispatch(removeTodo(item.id))}
+                    onToggle={() => dispatch(setTodoChecked.start(item.id, !item.checked))}
+                    onRemove={() => dispatch(removeTodo.start(item.id))}
                 />
             ))}
             <li>
