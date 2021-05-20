@@ -20,6 +20,7 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",
     "redux": "^4.2.0",
+    "redux-dynamic-modules": "^5.2.3",
     "rimraf": "^3.0.2",
     "typeface-annie-use-your-telescope": "1.1.13",
     "typeface-open-sans": "^1.1.13",

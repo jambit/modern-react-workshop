@@ -1,22 +1,6 @@
-import {
-    CombinedState,
-    combineReducers,
-    configureStore,
-} from '@reduxjs/toolkit';
-import { todosReducer } from './todos/reducer';
+import { createStore } from 'redux-dynamic-modules';
+import { coreModule } from './core/coreModule';
 
-const reducer = combineReducers({
-    todos: todosReducer,
-});
-
-export function createStore() {
-    return configureStore({
-        reducer,
-    });
+export function initStore() {
+    return createStore({}, coreModule());
 }
-
-type InferState<T> = T extends (...args: any[]) => CombinedState<infer S>
-    ? S
-    : never;
-
-export type AppState = InferState<typeof reducer>;
