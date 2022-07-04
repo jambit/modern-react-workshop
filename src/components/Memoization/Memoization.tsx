@@ -11,10 +11,19 @@ export const Memoization = () => {
 
     return (
         <div>
-            <input onChange={onChangeA} value={a} />
+            <h1 role="heading">Calculator</h1>
+            <input
+                onChange={onChangeA}
+                value={a}
+                placeholder="First Operand"
+            />{' '}
             +
-            <input onChange={onChangeB} value={b} />
-            {`= ${sum}`}
+            <input
+                onChange={onChangeB}
+                value={b}
+                placeholder="Second Operand"
+            />{' '}
+            =<span data-testid="sum">{sum}</span>
             <button onClick={onClick}>Send</button>
         </div>
     );

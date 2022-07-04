@@ -1,20 +1,22 @@
-- State hooks
-  - useState
-  - useReducer
-- Effect Hooks
-  - useEffect
-    - simple
-    - with dependency
-    - what is useLayoutEffect?
-- createContext & useContext
-  - default value
-  - context provider
-- Memoization
-  - UseMemo
-  - useCallback
-- References
-  - useRef element
-  - useRef counter
-- Custom Hooks
-  - useToggle
-  - useInput
+- Explain setup
+  - package.json
+  - jest.config.js
+  - setupTests.ts
+- Test memoization
+  - has the right title
+  - getElements
+  - starts with a value of 0
+    - toHaveTextContent + regex
+  - adds values correctly
+  - shows the calculated value in an alert call when pressing the button
+    - using jest.spyOn().mockImplementationOnce
+- Test useInput
+  - should change the value when onChange gets triggered
+    - renderHook()
+    - use result.current
+    - act()
+- Test useToggle
+  - should toggle the value
+  - introduce helper functions for readability of result.current
+- Show test coverage
+- Show enzyme in comparison
