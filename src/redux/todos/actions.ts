@@ -16,8 +16,8 @@ export const addTodo = {
     success: createAction('todo/add/success', (item: Todo) => ({
         payload: { item },
     })),
-    failure: createAction('todo/add/failure', (label: string) => ({
-        payload: { label },
+    failure: createAction('todo/add/failure', (label: string, error: string) => ({
+        payload: { label, error },
     })),
 };
 
