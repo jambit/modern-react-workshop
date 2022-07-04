@@ -1,8 +1,2 @@
-- npm i redux-saga regenerator-runtime
-- import regenerator runtime
-- create/add saga middleware
-- create/run root saga with yield all and empty array
-- create todosSaga, calling fetchTodosSaga
-- make addTodo asynchronous and remove nextId from TodoState
-- make setTodoChecked asynchronous
-- make removeTodo asynchronous
+- subscribe to storage event
+- refetch todos
