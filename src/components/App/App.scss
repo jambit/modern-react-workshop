@@ -1,0 +1,9 @@
+.app-container {
+    border: 1px solid green;
+    > h1 {
+        color: green;
+    }
+    img {
+        max-height: 150px;
+    }
+}
