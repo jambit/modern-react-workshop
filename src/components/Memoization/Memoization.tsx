@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
+import { useInput } from '../../hooks/useInput';
 
 export const Memoization = () => {
-    const a = 0;
-    const b = 0;
-    const sum = 0;
+    const [a, onChangeA] = useInput('0');
+    const [b, onChangeB] = useInput('0');
+    const sum = useMemo(() => parseFloat(a) + parseFloat(b), [a, b]);
+    const onClick = useCallback(() => {
+        alert(`Value: ${sum}`);
+    }, [sum]);
+
     return (
         <div>
-            <input value={a} />
+            <input onChange={onChangeA} value={a} />
             +
-            <input value={b} />
+            <input onChange={onChangeB} value={b} />
             {`= ${sum}`}
-            <button>Send</button>
+            <button onClick={onClick}>Send</button>
         </div>
     );
 };

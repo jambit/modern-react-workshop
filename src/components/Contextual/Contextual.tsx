@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { createContext, useContext } from 'react';
+
+export const MyContext = createContext('defaultValue');
 
 export const Contextual = () => {
-    return <div>Context: ?</div>;
+    const context = useContext(MyContext);
+    return <div>Context: {context}</div>;
 };
