@@ -3,9 +3,11 @@ import {
     combineReducers,
     configureStore,
 } from '@reduxjs/toolkit';
+import { sessionReducer } from './session/reducer';
 import { todosReducer } from './todos/reducer';
 
 const reducer = combineReducers({
+    session: sessionReducer,
     todos: todosReducer,
 });
 

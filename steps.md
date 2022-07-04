@@ -1,10 +1,8 @@
-- npm i react-redux @types/react-redux
-- create redux folder structure
-- move add action
-- move reducer
-- add "remove" and "toggle" actions and handle them in reducer
-- create function "createStore"
-- infer combined state type
-- create selector
-- wrap app with provider
-- make todo app use redux
+- npm i redux-saga regenerator-runtime
+- import regenerator runtime
+- create/add saga middleware
+- create/run root saga with yield all and empty array
+- create todosSaga, calling fetchTodosSaga
+- make addTodo asynchronous and remove nextId from TodoState
+- make setTodoChecked asynchronous
+- make removeTodo asynchronous
