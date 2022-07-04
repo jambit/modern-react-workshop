@@ -83,12 +83,12 @@ export function* removeTodoSaga(action: ReturnType<typeof removeTodo.start>) {
     }
 }
 
-function subscribeToStorage(emit: (event: StorageEvent) => void) {
+export function subscribeToStorage(emit: (event: StorageEvent) => void) {
     window.addEventListener('storage', emit);
     return () => window.removeEventListener('storage', emit);
 }
 
-function* subscribeToUpdatesSaga() {
+export function* subscribeToUpdatesSaga() {
     const channel: EventChannel<StorageEvent> = yield call(
         eventChannel,
         subscribeToStorage
