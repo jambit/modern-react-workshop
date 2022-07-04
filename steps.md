@@ -1,2 +1,3 @@
-- subscribe to storage event
-- refetch todos
+- npm i -D redux-saga-test-plan
+- Create some testSaga tests
+- Create some expectSaga tests
