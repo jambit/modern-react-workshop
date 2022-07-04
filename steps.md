@@ -1,8 +1,10 @@
-- npm i redux
-- in a jest test
-  - create initial state + types
-  - create reducer
-  - create store
-  - create a test for initial state
-  - create a test for action modification
-  - create a test for initial state not being changed during action
+- npm i @reduxjs/toolkit
+- modify jest test
+  - Use createAction
+  - Use createReducer
+  - Mutate state object instead of returning new state
+    - Explain mutation vs return of "immer"
+  - Use combineReducers
+  - Use configureStore
+  - Use createSlice
+  - Use external action in createSlice
