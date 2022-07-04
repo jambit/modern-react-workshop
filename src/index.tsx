@@ -1,17 +1,7 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import 'typeface-open-sans';
 
-// Using default export:
-const DynamicApp = React.lazy(() => import('./components/App/App'));
-// Using named export:
-// const DynamicApp = React.lazy(() =>
-//     import('./components/App/App').then(({ App }) => ({ default: App }))
-// );
+import { App } from './components/App/App';
+import './style.scss';
 
-ReactDOM.render(
-    <Suspense fallback={<div>loading..</div>}>
-        <DynamicApp />
-    </Suspense>,
-    document.getElementById('app')
-);
+ReactDOM.render(<App />, document.getElementById('app'));

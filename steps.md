@@ -1,20 +1,20 @@
-- Parcel Setup
-  - npm init
-  - npm i react react-dom typescript parcel @types/react @types/react-dom
-  - create start script: "parcel src/index.html"
-- Typescript + React
-  - create index.tsx, render simple element
-- Styling & Components
-  - create style.css, import from index.html
-  - create App component, import style.css
-- Production Build
-  - npm i rimraf
-  - create build script: "rimraf dist && tsc && parcel build src/index.html"
-  - talk about production build
-- Asset imports:
-  - switch to scss
-  - import yaml from tsx
-  - import image from tsx
-  - npm i typeface-open-sans
-  - import typeface-open-sans. "Open Sans"
-- Code splitting via react.lazy
+- State hooks
+  - useState
+  - useReducer
+- Effect Hooks
+  - useEffect
+    - simple
+    - with dependency
+    - what is useLayoutEffect?
+- createContext & useContext
+  - default value
+  - context provider
+- Memoization
+  - UseMemo
+  - useCallback
+- References
+  - useRef element
+  - useRef counter
+- Custom Hooks
+  - useToggle
+  - useInput

@@ -1,4 +1,11 @@
 body {
-    background: lightgray;
-    font-family: 'Open Sans';
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+div {
+    margin: 4px 0;
+}
+
+button, input, span {
+    margin: 0 4px;
 }
