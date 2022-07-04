@@ -1,0 +1,8 @@
+- npm i redux
+- in a jest test
+  - create initial state + types
+  - create reducer
+  - create store
+  - create a test for initial state
+  - create a test for action modification
+  - create a test for initial state not being changed during action
