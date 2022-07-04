@@ -1,4 +1,11 @@
 import React from 'react';
-import { Memoization } from '../Memoization/Memoization';
+import { TodoList } from '../TodoList/TodoList';
 
-export const App = () => <Memoization />;
+export const App = () => {
+    return (
+        <div>
+            <h2>GRINCH TO DO LIST</h2>
+            <TodoList />
+        </div>
+    );
+};

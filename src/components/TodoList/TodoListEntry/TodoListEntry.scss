@@ -1,0 +1,23 @@
+.todo-list-entry {
+    cursor: pointer;
+    white-space: nowrap;
+    display: flex;
+
+    &.checked {
+        .icon {
+            color: red;
+        }
+        .label {
+            text-decoration: line-through;
+            text-decoration-color: red;
+        }
+    }
+    .label {
+        flex-grow: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .remove {
+        color: red;
+    }
+}

@@ -1,5 +1,8 @@
-body {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+body, input, button {
+    font-family: 'Annie Use Your Telescope', Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 24px;
+    background: black;
+    color: white;
 }
 
 div {
@@ -8,4 +11,8 @@ div {
 
 button, input, span {
     margin: 0 4px;
+}
+
+h2 {
+    color: #4a8f3c;
 }
